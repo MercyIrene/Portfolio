@@ -41,7 +41,7 @@ export function SkillsSection() {
     name: 'Arduino & Raspberry Pi',
     icon: CpuIcon
   }, {
-    name: 'CAD Software',
+    name: 'CAD',
     icon: WrenchIcon
   }, {
     name: 'Git & CI/CD',
@@ -74,12 +74,12 @@ export function SkillsSection() {
         </div>
       </div>;
   };
-  return <section id="skills" ref={ref} className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+  return <section id="skills" ref={ref} className="py-20 px-4 md:px-8 max-w-7xl mx-auto scroll-mt-24">
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
         Skills & Expertise
       </h2>
       <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
-        A comprehensive toolkit for building intelligent systems
+        My comprehensive toolkit for building intelligent systems
       </p>
       <div className="space-y-16">
         <div>

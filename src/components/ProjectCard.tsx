@@ -1,15 +1,12 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLinkIcon } from 'lucide-react';
 interface ProjectCardProps {
   title: string;
-  company: string;
   description: string;
   image: string;
 }
 export function ProjectCard({
   title,
-  company,
   description,
   image
 }: ProjectCardProps) {
@@ -26,18 +23,10 @@ export function ProjectCard({
         <img src={image} alt={title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
       </div>
-      <div className="relative p-6">
-        <div className="flex items-start justify-between mb-3">
-          <div>
-            <p className="text-purple-400 text-sm font-medium mb-1">
-              {company}
-            </p>
-            <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
-              {title}
-            </h3>
-          </div>
-          <ExternalLinkIcon className="text-gray-500 group-hover:text-purple-400 transition-colors duration-300" size={20} />
-        </div>
+      <div className="relative p-6 space-y-3">
+        <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
+          {title}
+        </h3>
         <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
       </div>
     </div>;

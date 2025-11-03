@@ -1,6 +1,6 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { RocketIcon, CpuIcon, ZapIcon, SettingsIcon } from 'lucide-react';
+import { RocketIcon, CpuIcon, ZapIcon, SettingsIcon, DownloadIcon } from 'lucide-react';
 export function FeaturedProject() {
   const {
     ref,
@@ -58,6 +58,12 @@ export function FeaturedProject() {
                   <p className="text-gray-500 text-xs">{feature.description}</p>
                 </div>;
           })}
+          </div>
+          <div className="flex justify-start pt-6">
+            <a href="/reports/Augmented Ignition Report.pdf" download target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 bg-purple-600/30 hover:bg-purple-600/50 border border-purple-400/60 text-purple-100 font-semibold tracking-wide rounded-lg transition-all duration-300 hover:scale-105 uppercase">
+              <DownloadIcon size={18} />
+              VIEW REPORT
+            </a>
           </div>
         </div>
         <div className="relative group">

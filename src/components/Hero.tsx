@@ -1,7 +1,7 @@
 import React from 'react';
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 export function Hero() {
-  return <section id="home" className="relative min-h-screen flex items-center justify-center px-4 md:px-8 pt-20">
+  return <section id="home" className="relative min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 scroll-mt-24">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent" />
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         <div className="mb-8 inline-block">
@@ -22,20 +22,20 @@ export function Hero() {
         </div>
         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
           I design and build intelligent systems that bridge hardware and
-          software — blending engineering precision with digital innovation.
+          software - blending engineering precision with digital innovation.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3 bg-purple-600/20 hover:bg-purple-600/40 border border-purple-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50">
+          <a href="www.linkedin.com/in/mercy-irene-wangari" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3 bg-purple-600/20 hover:bg-purple-600/40 border border-purple-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50">
             <LinkedinIcon size={20} className="text-purple-400" />
             <span className="text-gray-300 group-hover:text-white">
               LinkedIn
             </span>
           </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3 bg-pink-600/20 hover:bg-pink-600/40 border border-pink-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50">
+          <a href="https://github.com/MercyIrene" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3 bg-pink-600/20 hover:bg-pink-600/40 border border-pink-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/50">
             <GithubIcon size={20} className="text-pink-400" />
             <span className="text-gray-300 group-hover:text-white">GitHub</span>
           </a>
-          <a href="#contact" className="group flex items-center gap-2 px-6 py-3 bg-cyan-600/20 hover:bg-cyan-600/40 border border-cyan-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/50">
+          <a href="mailto:mercyirene3@gmail.com" className="group flex items-center gap-2 px-6 py-3 bg-cyan-600/20 hover:bg-cyan-600/40 border border-cyan-500/50 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/50">
             <MailIcon size={20} className="text-cyan-400" />
             <span className="text-gray-300 group-hover:text-white">
               Contact
