@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SendIcon, CheckCircleIcon } from 'lucide-react';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE ?? '/api';
+
 export function ContactForm() {
   const {
     ref,
@@ -14,25 +17,45 @@ export function ContactForm() {
     email: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Integrate with Django backend with CSRF protection
-    setIsSubmitted(true);
-    setStatusMessage('Thanks for reaching out! This demo form does not send messages yet. Please connect with me on LinkedIn while the secure backend is under construction.');
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+    setStatusMessage(null);
+    setIsSuccess(false);
+    try {
+      const response = await fetch(`${API_BASE_URL}/contact/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      if (!response.ok) {
+        const errorPayload = await response.json().catch(() => null);
+        throw new Error(errorPayload?.detail || 'Something went wrong');
+      }
+      setIsSuccess(true);
+      setStatusMessage('Thanks for reaching out! I will get back to you shortly.');
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+    } catch (error: any) {
+      setStatusMessage(error.message || 'Unable to send message right now. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-    setIsSubmitted(false);
+    setIsSuccess(false);
     setStatusMessage(null);
   };
   return <section id="contact" ref={ref} className={`py-20 px-4 md:px-8 max-w-4xl mx-auto transition-all duration-1000 scroll-mt-24 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -68,24 +91,20 @@ export function ContactForm() {
               </label>
               <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={6} className="w-full px-4 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors duration-300 resize-none" placeholder="Tell me about your project..." />
             </div>
-            <button type="submit" className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2">
-              {isSubmitted ? <>
+            <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {isSuccess ? <>
                   <CheckCircleIcon size={20} />
-                  Next Steps Below
+                  Message Sent
                 </> : <>
                   <SendIcon size={20} />
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </>}
             </button>
           </div>
         </form>
       </div>
       {statusMessage && <p className="mt-8 text-sm text-gray-400 text-center" aria-live="polite">
-          {statusMessage}{' '}
-          <a href="www.linkedin.com/in/mercy-irene-wangari" target="_blank" rel="noopener noreferrer" className="text-purple-300 underline">
-            Continue on LinkedIn
-          </a>
-          .
+          {statusMessage}
         </p>}
     </section>;
 }
